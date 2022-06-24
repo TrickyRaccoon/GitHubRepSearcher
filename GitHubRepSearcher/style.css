@@ -15,7 +15,7 @@ body{
     margin: auto;
     margin-top: 20px;
     margin-bottom: 20px;
-    width: 80%;
+    width: 213px;
     text-align: left;
 }
 
@@ -43,7 +43,8 @@ body{
 
 .item-title{
     font-size: small;
-    margin-left: 5px;
+    padding-left: 5px;
+
 }
 
 .rep-info{
@@ -53,6 +54,9 @@ body{
     width: 80%;
     margin-bottom: 20px;
     font-size: smaller;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: rgb(135, 93, 174);
 }
 
 .remove-button{
@@ -61,6 +65,5 @@ body{
     display: block;
     width: 30px;
     height: 30px;
-    background-color: red;
+    background: url('././image/icons8-cancel.svg') no-repeat center;
 }
-

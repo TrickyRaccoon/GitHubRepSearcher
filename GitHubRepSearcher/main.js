@@ -36,15 +36,12 @@ class View {
         this.app.append(this.repInfo);
         this.deleteButton = this.createElement('div', 'remove-button');
         this.repInfo.append(this.deleteButton);
-        this.deleteButton.addEventListener('click', () => {
-            this.repInfo.remove();
-        });
         this.searchInput.value = '';
         this.clearReps();
     }
 
     saveRepsData(){
-        a = document.querySelectorAll('.rep-info')
+        a = document.querySelectorAll('.rep-info');
         return a
     }
 }
@@ -89,4 +86,9 @@ class Search {
         };
     }
 }
+document.addEventListener('click', function(e){
+    if(e.target.className == 'remove-button'){
+        e.target.closest('.rep-info').remove();
+    }
+ });
 new Search(new View());
