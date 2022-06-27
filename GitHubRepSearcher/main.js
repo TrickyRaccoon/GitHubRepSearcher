@@ -20,10 +20,11 @@ class View {
         return element;
     }
     createRep(repsData){
-        const repElem = this.createElement('li', 'search-results__item');
-        repElem.innerHTML = `<div class = 'item-title'>${repsData.name}</div>`;
-        repElem.addEventListener('click', () => this.showRepsData(repsData));
-        this.searhResults.append(repElem);
+        const repoElement = this.createElement('li', 'search-results__item');
+        repoElement.innerHTML = `<div class = 'item-title'>${repsData.name}</div>`;
+        repoElement.onclick = () => this.showRepsData(repsData);
+        this.searhResults.append(repoElement);
+
     }
 
     clearReps() {
@@ -54,21 +55,21 @@ class Search {
 
     async searchReps(){
         if(this.view.searchInput.value){
-            return await fetch(`https://api.github.com/search/repositories?q=${this.view.searchInput.value}&per_page=5`).then((res) => {
-                if (res.ok){
-                    this.view.clearReps();
-                    res.json().then(res => {
-                        res.items.forEach((rep) => {
-                            this.view.createRep(rep);
-                        })
+            this.loadRepos(this.view.searchInput.value).then((res) => {
+                this.view.clearReps();
+                res.json().then(res => {
+                    res.items.forEach((rep) => {
+                        this.view.createRep(rep);
                     })
-                } else {
-                    this.view.clearReps();
-                }
+                })
             })
         } else{
             this.view.clearReps();
         }
+    }
+
+    async loadRepos(searchValue){
+        return await fetch(`https://api.github.com/search/repositories?q=${searchValue}&per_page=5`)
     }
 
     debounce(func, wait, immediate) {
@@ -87,7 +88,7 @@ class Search {
     }
 }
 document.addEventListener('click', function(e){
-    if(e.target.className == 'remove-button'){
+    if(e.target.className === 'remove-button'){
         e.target.closest('.rep-info').remove();
     }
  });
